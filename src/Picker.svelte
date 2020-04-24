@@ -1,20 +1,25 @@
 <script>
-  import { onMount } from "svelte";
-
-  export let pages = [];
-  export let activePage;
+  import { onMount } from "svelte"
+  export let pages = []
+  export let activePage
 
   onMount(() => {
     // Set default tab value
-    activePage = pages[0];
+    activePage = pages[0]
   });
   
-	const handleClick = tabValue => () => (activePage = tabValue);
+	const handleClick = tabValue => () => (activePage = tabValue)
 </script>
+
+<div class="picker">
+	{#each pages as page}
+		<span class="picker-option {activePage === page ? 'selected' : ''}" href="#{page}" on:click={handleClick(page)}>{page}</span>
+	{/each}
+</div>
 
 <style>
 	.picker {
-  	margin-top:  5px;
+  		margin-top:  10px;
 	}
 	
 	.picker-option {
@@ -32,8 +37,3 @@
 		padding-bottom: 3px;
 	}
 </style>
-<div class=".picker">
-	{#each pages as page}
-		<span class="picker-option {activePage === page ? 'selected' : ''}" href="#{page}" on:click={handleClick(page)}>{page}</span>
-	{/each}
-</div>
